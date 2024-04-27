@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_GAME, ADD_PLAYER, LIST_PLAYERS } from "../graphql/operations";
+import GameStatus from "../components/GameStatus";
 
 interface UserProps {
   userInfo: Record<string, any>;
@@ -11,6 +12,8 @@ const Games: React.FC<UserProps> = ({ userInfo }) => {
   const [addPlayer] = useMutation(ADD_PLAYER);
 
   const [newGameText, setNewGameText] = useState("");
+  const [joinedGameName, setJoinedGameName] = useState("");
+  const [isHost, setIsHost] = useState(false);
 
   const loading = false;
   const error = undefined;
@@ -29,7 +32,9 @@ const Games: React.FC<UserProps> = ({ userInfo }) => {
   const handleCreateGame = async () => {
     if (!newGameText.trim()) return;
     await addGame({ variables: { name: newGameText, host: userInfo.sub } });
-    setNewGameText(newGameText);
+    setNewGameText("");
+    setJoinedGameName("newGameText");
+    setIsHost(true);
   };
 
   const handleAddPlayer = async () => {
@@ -45,7 +50,7 @@ const Games: React.FC<UserProps> = ({ userInfo }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <>
       <div className="navbar bg-base-300 text-neutral-content">
         <div className="flex-1">
           <a href="/" className="p-2 normal-case text-xl">
@@ -72,7 +77,8 @@ const Games: React.FC<UserProps> = ({ userInfo }) => {
           </button>
         </div>
       </div>
-    </div>
+      <GameStatus gameName={joinedGameName} isHost={isHost} />
+    </>
   );
 };
 
