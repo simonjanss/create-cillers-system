@@ -81,6 +81,16 @@ class Subscription:
                     yield p
             await asyncio.sleep(0.5)
 
+    @strawberry.subscription
+    async def player_added(self, game_name: str) -> AsyncGenerator[str, None]:
+        # TODO: use a Kafka topic to avoid polling here
+        seen = set(p for p in db.list_players(game_name))
+        while True:
+            for p in db.list_players():
+                if p not in seen:
+                    seen.add(p)
+                    yield p
+            await asyncio.sleep(0.5)
 #### API ####
 
 def get_app():
