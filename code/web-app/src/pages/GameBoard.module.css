@@ -38,3 +38,97 @@
 .user-selected {
   background-color: #ffcccb; /* Light red background for user selected cells */
 }
+
+.cell.missed {
+  background-color: green; /* Green background for missed correct cells */
+}
+
+.cell.missed .symbol {
+  color: red; /* Red color for wrong tick marks */
+}
+
+.cell.incorrect {
+  background-color: #ffcccb; /* Light red background for incorrect cells */
+}
+
+.score {
+  margin-top: 20px; /* Spacing above the score */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* GameBoard.module.css */
+.gameContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameBoard {
+  display: grid;
+  grid-template-columns: repeat(
+    ${props => props.size},
+    1fr
+  ); /* This will be dynamically set based on size prop */
+  grid-gap: 5px;
+  margin: 20px;
+}
+
+.cell {
+  width: 50px; /* or whatever size you want */
+  height: 50px; /* or whatever size you want */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff55; /* just for visibility */
+  /* rest of your styles... */
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  z-index: 10; /* Above all other content */
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.gameBoard {
+  display: grid;
+  grid-template-columns: repeat(
+    ${size},
+    50px
+  ); /* Dynamic based on the size prop */
+  grid-auto-rows: 50px;
+  gap: 5px;
+  margin-bottom: 20px; /* Space for the timer and score */
+}
+
+.timer {
+  margin-top: 20px; /* Space after the game board */
+}
+
+.score {
+  margin-top: 10px; /* Space after the timer or game board */
+}
