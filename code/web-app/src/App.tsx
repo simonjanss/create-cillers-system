@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Main from './pages/Main';
-import AuthCallback from './pages/AuthCallback';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Main from "./pages/Main";
+import AuthCallback from "./pages/AuthCallback";
 import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
 
-const isDev = process.env.NODE_ENV === 'development';
+const isDev = process.env.NODE_ENV === "development";
 
 const App: React.FC = () => {
   return (
@@ -13,8 +13,8 @@ const App: React.FC = () => {
         <Route path="*" element={<Main />} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
 if (isDev) {
   loadDevMessages();
