@@ -61,3 +61,9 @@ export const LIST_PLAYERS = gql`
     listPlayers(gameName: $gameName)
   }
 `;
+
+export const PLAYER_ADDED_SUBSCRIPTION = gql`
+  subscription OnPlayerAdded($gameName: String!) {
+    playerAdded(gameName: $gameName)
+  }
+`;
